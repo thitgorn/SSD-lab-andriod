@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.activity_input.*
 
 class InputActivity : AppCompatActivity() {
 
@@ -15,8 +16,14 @@ class InputActivity : AppCompatActivity() {
 
     fun saveButtonClicked(view: View) {
         val data = Intent()
-        data.putExtra("TASK_NAME", "I AM HAPPY")
-        setResult(Activity.RESULT_OK, intent)
+        val taskName = inputTaskEditText.text.toString();
+        if(taskName != "") {
+            data.putExtra("TASK_NAME", taskName)
+            setResult(Activity.RESULT_OK, data)
+        }
+        else {
+            setResult(Activity.RESULT_CANCELED)
+        }
         finish()
     }
     fun cancelButtonClicked(view: View){
